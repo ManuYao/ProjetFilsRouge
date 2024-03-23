@@ -1,20 +1,20 @@
-// Importer les modules nécessaires
+const mongoose = require('mongoose');
 const express = require('express');
-const films = require ('./service/filmsdata')
+const { injectFilmsData } = require('./service/data/filmsData');
 
-/* Start serveur */
 const app = express();
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+
+mongoose.connect('mongodb://127.0.0.1:27017/ymovie', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => {
+  console.log('Connexion à MongoDB réussie !');
+
+  //Fonction filmData
+  injectFilmsData();
+
+  app.listen(PORT, () => {
     console.log(`Le serveur fonctionne sur http://localhost:${PORT}`);
   });
-
-/**
- * -------Route films list---------
- * 
- * http://localhost:3000/data/films ON
- *  */
-app.get('/data/films', (req, res) => {
-  res.json(films)
-});
-
+}).catch(err => console.error('Erreur de connexion à MongoDB :', err));
