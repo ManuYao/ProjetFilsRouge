@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const express = require('express');
-const { injectFilmsData } = require('./service/data/filmsData');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -11,11 +10,11 @@ mongoose.connect('mongodb://127.0.0.1:27017/ymovie', {
 }).then(() => {
   console.log('Connexion à MongoDB réussie !');
 
-  //filmData.js
+  //filmData.js soon ------------------------------------------------------
 const Film = require('./models/filmsModel');
 const xlsx = require('xlsx');
 
-// Exporte la fonction injectFilmsData
+  // Convertie 'xlsx' > 'json' et sauvegarde 'film'
 async function injectFilmsData() {
   try {
     const excelFilePath = '../database/film.xlsx';
@@ -32,9 +31,18 @@ async function injectFilmsData() {
     console.error('Erreur lors de l\'injection des données de films :', error);
   }
 }
+// ---------------------------------------------------------
 
+/**
+ * @function injectFilmsData 
+ * @borrows './'
+ * @description La fonction 'injectFilmsData' a pour but d'injecter
+ *              les données contenues dans un fichier Excel (film.xlsx) 
+ *              dans une base de données MongoDB.
+ * **/ 
 injectFilmsData()
 
+  // Start server
   app.listen(PORT, () => {
     console.log(`Le serveur fonctionne sur http://localhost:${PORT}`);
   });
