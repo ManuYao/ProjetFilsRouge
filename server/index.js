@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const express = require('express');
-
+const cors = require('cors')
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 2000;
 
 mongoose.connect('mongodb://127.0.0.1:27017/ymovie', {
   useNewUrlParser: true,
@@ -32,6 +32,7 @@ async function injectFilmsData() {
   }
 }
 // ---------------------------------------------------------
+app.use(cors())
 
 /**
  * @function injectFilmsData 
@@ -42,8 +43,19 @@ async function injectFilmsData() {
  * **/ 
 injectFilmsData()
 
-  // Start server
+  // Endpoint 
+  app.get('/films', async (req, res) => {
+    try {
+      const films = await Film.find();
+      res.json(films);
+    } catch (error) {
+      res.status(500).json({ message: 'Erreur lors de la récupération des films', error: error.message });
+    }
+  });
+
   app.listen(PORT, () => {
     console.log(`Le serveur fonctionne sur http://localhost:${PORT}`);
   });
 }).catch(err => console.error('Erreur de connexion à MongoDB :', err));
+
+
