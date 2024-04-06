@@ -13,7 +13,7 @@ const FilmList = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{backgroundColor: '#202248'}}>
       <h2>Liste des films</h2>
       <ul>
         {films.map(film => (

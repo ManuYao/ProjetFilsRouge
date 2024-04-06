@@ -1,61 +1,136 @@
-const mongoose = require('mongoose');
-const express = require('express');
-const cors = require('cors')
+const mongoose = require("mongoose");
+const express = require("express");
+const cors = require("cors");
 const app = express();
+const Sub = require("./models/subModel");
+const Film = require("./models/filmsModel");
+const xlsx = require("xlsx");
+const jwt = require("jsonwebtoken");
 const PORT = process.env.PORT || 2000;
+app.use(express.json());
 
-mongoose.connect('mongodb://127.0.0.1:27017/ymovie', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => {
-  console.log('Connexion à MongoDB réussie !');
 
-  //filmData.js soon ------------------------------------------------------
-const Film = require('./models/filmsModel');
-const xlsx = require('xlsx');
+mongoose
+  .connect("mongodb://127.0.0.1:27017/ymovie", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Connexion à MongoDB réussie !");
 
-  // Convertie 'xlsx' > 'json' et sauvegarde 'film'
-async function injectFilmsData() {
-  try {
-    const excelFilePath = '../database/film.xlsx';
-    const workbook = xlsx.readFile(excelFilePath);
-    const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-    const filmsData = xlsx.utils.sheet_to_json(worksheet);
 
-    for (const filmData of filmsData) {
-      const film = new Film(filmData);
-      await film.save();
+    async function injectFilmsData() {
+      try {
+        const excelFilePath = "../database/film.xlsx";
+        const workbook = xlsx.readFile(excelFilePath);
+        const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+        const filmsData = xlsx.utils.sheet_to_json(worksheet);
+
+
+        for (const filmData of filmsData) {
+          const film = new Film(filmData);
+          await film.save();
+        }
+        console.log("Données de films injectées avec succès !");
+      } catch (error) {
+        console.error(
+          "Erreur lors de l'injection des données de films :",
+          error
+        );
+      }
     }
-    console.log('Données de films injectées avec succès !');
-  } catch (error) {
-    console.error('Erreur lors de l\'injection des données de films :', error);
-  }
-}
-// ---------------------------------------------------------
-app.use(cors())
 
-/**
- * @function injectFilmsData 
- * @borrows './'
- * @description La fonction 'injectFilmsData' a pour but d'injecter
- *              les données contenues dans un fichier Excel (film.xlsx) 
- *              dans une base de données MongoDB.
- * **/ 
-injectFilmsData()
+    //Middleware pour autoriser les requêtes CORS
+    app.use(cors());
 
-  // Endpoint 
-  app.get('/films', async (req, res) => {
-    try {
-      const films = await Film.find();
-      res.json(films);
-    } catch (error) {
-      res.status(500).json({ message: 'Erreur lors de la récupération des films', error: error.message });
+// _Vérification 
+    //Middleware pour vérifier le token JWT
+    function verifyToken(req, res, next) {
+      // Récupérer le token depuis l'en-tête Authorization lors de la requête HTTP {Login.jsx}
+      const token = req.headers['authorization'];
+      if (!token) {
+        return res.status(401).json({ message: 'Token manquant. Authentification nécessaire.' });
+      }
+    
+      // Vérifier et décoder le token
+      jwt.verify(token.split(' ')[1], 'secretKey', (err, decodedToken) => {
+        if (err) {
+          return res.status(403).json({ message: 'Token invalide.' });
+        }
+        // Ajouter l'ID de l'utilisateur dans l'objet req
+        req.userId = decodedToken.userId;
+        next();
+      });
     }
-  });
+    module.exports = verifyToken;
 
-  app.listen(PORT, () => {
-    console.log(`Le serveur fonctionne sur http://localhost:${PORT}`);
-  });
-}).catch(err => console.error('Erreur de connexion à MongoDB :', err));
+    app.get('/data', verifyToken, (req, res) => {
+      res.json({ message: 'Données protégées récupérées avec succès.' });
+    });
+//' _Vérification 
+
+    //Appel de la fonction ##injectFilmsData() pour injecter les données de films dans la base de données
+    injectFilmsData();
+
+
+    app.get("/films", async (req, res) => {
+      try {
+        const films = await Film.find();
+        res.json(films);
+      } catch (error) {
+        res.status(500).json({
+          message: "Erreur lors de la récupération des films",
+          error: error.message,
+        });
+      }
+    });
+
+    //Fonction pour générer un token JWT
+    function generateToken(user) {
+      const token = jwt.sign({userId: user._id}, 'secret-key', {expiresIn: "1h"});
+      return token;
+    }
+
+    app.post("/inscription", async (req, res) => {
+      try {
+        const { email, password } = req.body;
+        const sub = new Sub({ email, password }); 
+        await sub.save();
+        console.log(email, password);
+        res.json({ message: "Utilisateur inscrit avec succès !" });
+      } catch (error) {
+        res.status(500).json({
+          message: "Erreur lors de l'inscription",
+          error: error.message,
+        });
+      }
+    });
+
+
+    app.post("/connection", async (req, res) => {
+      try {
+        //Vérification & récupération des données de l'utilisateur
+        const { email, password } = req.body;
+        const existingUser = await Sub.findOne({ email, password });
+        
+        if (!existingUser) {
+          return res.status(404).json({ message: "Utilisateur non trouvé." });
+        }
+        const token = generateToken(existingUser);
+        res.json({ message: "Utilisateur connecté avec succès !", token });
+      } catch (error) {
+        res.status(500).json({
+          message: "Erreur lors de la connexion",
+          error: error.message,
+        });
+      }
+    });
+
+
+    app.listen(PORT, () => {
+      console.log(`Le serveur fonctionne sur http://localhost:${PORT}`);
+    });
+  })
+  .catch((err) => console.error("Erreur de connexion à MongoDB :", err));
 
 
