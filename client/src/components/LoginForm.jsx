@@ -38,9 +38,7 @@ export default function LoginForm({ setToken }) {
     };
 
     return (
-        <div style={{backgroundColor: '#202248'}}>
-            <h2>Connexion</h2>
-
+        <div>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="email">Email:</label>
                 <input
@@ -53,6 +51,7 @@ export default function LoginForm({ setToken }) {
                     onChange={handlePasswordChange}
                 />
                 <button type="submit">Se connecter</button>
+                <h2>Connexion</h2>
             </form>
         </div>
     );

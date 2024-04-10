@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import FilmeFilter from './FilmFilter';
-import LoginForm from './LoginForm';
-import Register from './Register';
+import FilmeFilter from '../components/FilmFilter';
+import LoginForm from '../components/LoginForm';
+import Register from '../components/RegisterForm';
 
 export default function Login() {
     const [token, setToken] = useState('');
