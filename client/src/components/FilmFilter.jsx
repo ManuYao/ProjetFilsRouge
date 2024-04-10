@@ -1,7 +1,17 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 
-const FilmGenreFilter = ({ films, genre }) => {
-const filteredGenresFilms = films.filter(film => film.Genre && film.Genre.includes(genre));
+function FilmGenreFilter({ genre }) {
+    const [films, setFilms] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:2000/films')
+            .then(response => response.json())
+            .then(data => setFilms(data))
+            .catch(error => console.error('Erreur récupération des données des films:', error));
+            console.log('Données récupérées avec succès :', films);
+    }, []);
+
+    const filteredGenresFilms = films.filter(film => film.Genre && film.Genre.includes(genre));
 
     return (
         <>

@@ -126,6 +126,10 @@ mongoose
       }
     });
 
+    app.get('/', (req, res) => {
+      //res.send('Bienvenue sur le serveur YMovie !');
+      res.sendFile(__dirname + '/index.html');
+    });
 
     app.listen(PORT, () => {
       console.log(`Le serveur fonctionne sur http://localhost:${PORT}`);

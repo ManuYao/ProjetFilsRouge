@@ -1,5 +1,4 @@
 import './styles/App.css';
-import FilmList from './components/FilmList';
 import Login from './components/Login';
 
 function App() {
