@@ -94,15 +94,15 @@ mongoose
     app.post("/inscription", async (req, res) => {
       try {
         const { email, password } = req.body;
-        const sub = new Sub({ email, password }); 
-        await sub.save();
-        console.log(email, password);
-        res.json({ message: "Utilisateur inscrit avec succès !" });
+        const sub = new Sub({ email, password });
+        await sub.save(); 
+        console.log(email, password); 
+        res.json({ message: "Utilisateur inscrit avec succès !" }); 
       } catch (error) {
         res.status(500).json({
           message: "Erreur lors de l'inscription",
           error: error.message,
-        });
+        }); 
       }
     });
 

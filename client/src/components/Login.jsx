@@ -1,12 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FilmeFilter from './FilmFilter';
 import LoginForm from './LoginForm';
+import Register from './Register';
 
 export default function Login() {
     const [token, setToken] = useState('');
     const [films, setFilms] = useState([]);
+    const [showRegister, setShowRegister] = useState(false);
 
-    //fonction de déconnexion
+    // Fonction pour basculer entre le formulaire de connexion et d'inscription
+    const toggleRegister = () => {
+        setShowRegister(!showRegister);
+    };
+
+    // Fonction de déconnexion
     const handleLogout = () => {
         localStorage.removeItem('token');
         setToken('');
@@ -22,7 +29,7 @@ export default function Login() {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
-            });          
+            });
 
             const data = await response.json();
             setFilms(data);
@@ -32,7 +39,7 @@ export default function Login() {
         }
     };
 
-    //récupération du token dans le local storage
+    // Récupération du token dans le local storage
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
@@ -46,7 +53,11 @@ export default function Login() {
             {token ? (
                 <button onClick={handleLogout}>Se déconnecter</button>
             ) : (
-                <LoginForm setToken={setToken} />
+                <>
+                    {showRegister ? null : <LoginForm setToken={setToken} />}
+                    <p onClick={toggleRegister}>{showRegister ? 'Connexion' : 'Inscription'}</p>
+                    {showRegister && <Register />}
+                </>
             )}
 
             {/* Affiche les films filtrés par genre lors de la connexion */}
