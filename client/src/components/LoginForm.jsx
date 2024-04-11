@@ -1,8 +1,25 @@
 import React, { useState } from 'react';
+import {createAvatar} from '@dicebear/avatars';
+import {bottts} from '@dicebear/collection';
 
 export default function LoginForm({ setToken }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    //mise à jour du seed pour l'avatar
+    const updateAvatar = (name) => {
+        return name.trim().toLowerCase();
+    }
+
+    //avatar
+    const avatar = createAvatar(bottts, {
+        seed: updateAvatar(email),
+        width: 124,
+        height: 200,
+        radius: 0,
+    });
+
+    const svg = avatar.toString();
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -39,6 +56,7 @@ export default function LoginForm({ setToken }) {
 
     return (
         <div>
+            <div dangerouslySetInnerHTML={{ __html: avatar }} />
             <form onSubmit={handleSubmit}>
                 <label htmlFor="email">Email:</label>
                 <input
@@ -51,7 +69,6 @@ export default function LoginForm({ setToken }) {
                     onChange={handlePasswordChange}
                 />
                 <button type="submit">Se connecter</button>
-                <h2>Connexion</h2>
             </form>
         </div>
     );
