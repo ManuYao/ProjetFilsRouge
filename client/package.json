@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "version": "V0.6.5",
+  "version": "V0.6.9",
   "private": true,
   "dependencies": {
     "@dicebear/avatars": "^4.10.8",

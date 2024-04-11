@@ -1,12 +1,12 @@
 import './styles/App.css';
-import Authentication from './pages/Authentication';
+import Authentification from './pages/Authentification';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
     
-        <Authentication />
+        <Authentification />
 
       </header>
     </div>

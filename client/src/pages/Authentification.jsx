@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import FilmeFilter from '../components/FilmFilter';
 import LoginForm from '../components/LoginForm';
 import Register from '../components/RegisterForm';
+import '../styles/pages/Authentification.scss';
 
 export default function Authentication() {
     const [token, setToken] = useState('');
@@ -49,22 +50,23 @@ export default function Authentication() {
     }, []);
 
     return (
-        <div>
+        <div style={{ overflow: 'hidden' }}>
             {token ? (
                 <button onClick={handleLogout}>Se déconnecter</button>
             ) : (
                 <>
                     {showRegister ? null : <LoginForm setToken={setToken} />}
-                    <p style={{position:'relative', left:'84%', width: '166px'}} 
-                        onClick={toggleRegister}>
-                            {showRegister ? 
-                                <p className='auth_text_login' style={{position:'relative', top:30}}>Connexion</p> 
-                                    : 
-                                <p className='auth_text_register'>Inscription</p>}</p>
                     {showRegister && <Register />}
+                    <div style={{ position: 'relative', left: 'calc(100% - 200px)', width: '166px' }} onClick={toggleRegister}>
+                        {showRegister ? 
+                            <p className='auth_text_sub' >Connexion</p> 
+                            : 
+                            <p className='auth_text_sub'>Inscription</p>}
+                    </div>
+                    
                 </>
             )}
-
+    
             {/* Affiche les films filtrés par genre lors de la connexion */}
             {token && (
                 <>
@@ -76,4 +78,4 @@ export default function Authentication() {
             )}
         </div>
     );
-}
+}    
