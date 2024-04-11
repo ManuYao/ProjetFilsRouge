@@ -3,7 +3,7 @@ import FilmeFilter from '../components/FilmFilter';
 import LoginForm from '../components/LoginForm';
 import Register from '../components/RegisterForm';
 
-export default function Login() {
+export default function Authentication() {
     const [token, setToken] = useState('');
     const [films, setFilms] = useState([]);
     const [showRegister, setShowRegister] = useState(false);
@@ -55,7 +55,12 @@ export default function Login() {
             ) : (
                 <>
                     {showRegister ? null : <LoginForm setToken={setToken} />}
-                    <p style={{position:'relative', left:'84%', width: '166px'}} onClick={toggleRegister}>{showRegister ? 'Connexion' : 'Inscription'}</p>
+                    <p style={{position:'relative', left:'84%', width: '166px'}} 
+                        onClick={toggleRegister}>
+                            {showRegister ? 
+                                <p className='auth_text_login' style={{position:'relative', top:30}}>Connexion</p> 
+                                    : 
+                                <p className='auth_text_register'>Inscription</p>}</p>
                     {showRegister && <Register />}
                 </>
             )}

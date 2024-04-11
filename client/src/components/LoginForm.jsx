@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import {createAvatar} from '@dicebear/avatars';
-import {bottts} from '@dicebear/collection';
+import {bigEars} from '@dicebear/collection';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import google from '../asset/images/logo_google.png';
+import meta from '../asset/images/logo_meta.png';
+import yahoo from '../asset/images/logo_yahoo.png';
 import '../styles/components/LoginForm.scss';
 
 export default function LoginForm({ setToken }) {
@@ -14,14 +18,12 @@ export default function LoginForm({ setToken }) {
     }
 
     //avatar
-    const avatar = createAvatar(bottts, {
+    const avatar = createAvatar(bigEars, {
         seed: updateAvatar(email),
         width: 124,
         height: 200,
         radius: 0,
     });
-
-    const svg = avatar.toString();
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -57,26 +59,31 @@ export default function LoginForm({ setToken }) {
     };
 
     return (
-        <div className='page_lauth'>
-            <div className='img_text'>
-                <h1>Connexion</h1>
-                <p>Connectez-vous à votre compte</p>
-                <p>Prêt à découvire des films ?</p>
-            </div>
+        <div className='page_auth'>
+            <div className='img'/>
             <div className='auth_menu'>
                 <div dangerouslySetInnerHTML={{ __html: avatar }} />
+                <div className='social'>
+                    <img src={google} alt='google' />
+                    <img src={meta} alt='meta' />
+                    <img src={yahoo} alt='yahoo' />   
+                </div>
+           
+
                 <form onSubmit={handleSubmit}>
-                    <label htmlFor="email">Email:</label>
-                    <input
+                    <TextField
                         type="email" id="email" name="email" value={email}
-                        onChange={handleEmailChange}
+                        onChange={handleEmailChange} placeholder="Email"
                     />
-                    <label htmlFor="password">Mot de passe:</label>
-                    <input
+                    <TextField
                         type="password" id="password" name="password" value={password}
-                        onChange={handlePasswordChange}
+                        onChange={handlePasswordChange} placeholder="Mot de passe"
                     />
-                    <Button type="submit">Se connecter</Button>
+                    <Button type="submit" variant='contained' style={{
+                        backgroundColor: '#171625',
+                        width: 245,
+                        height: 60
+                    }}>Se connecter</Button>
                 </form>
             </div>
         </div>

@@ -1,8 +1,30 @@
 import React, { useState } from 'react';
+import {createAvatar} from '@dicebear/avatars';
+import {bigEars} from '@dicebear/collection';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import google from '../asset/images/logo_google.png';
+import meta from '../asset/images/logo_meta.png';
+import yahoo from '../asset/images/logo_yahoo.png';
+import '../styles/components/LoginForm.scss';
+
 
 const RegisterForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+        //mise à jour du seed pour l'avatar
+        const updateAvatar = (name) => {
+            return name.trim().toLowerCase();
+        }
+
+        //avatar
+        const avatar = createAvatar(bigEars, {
+            seed: updateAvatar(email),
+            width: 124,
+            height: 200,
+            radius: 0,
+        });
 
     const handleRegister = async () => {
         try {
@@ -28,25 +50,32 @@ const RegisterForm = () => {
 
     return (
         <div className='page_auth'>
-            <div className='img_text'>
-                <h1>Inscription</h1>
-                <p>Inscription à un compte</p>
-                <p>Prêt à découvire des films ?</p>
-            </div>
+            <div className='img' />
             <div className='auth_menu'>
-                <input
+            <div dangerouslySetInnerHTML={{ __html: avatar }} />
+                <div className='social'>
+                    <img src={google} alt='google' />
+                    <img src={meta} alt='meta' />
+                    <img src={yahoo} alt='yahoo' />   
+                </div>
+            <form>
+                <TextField
                     type="text"
                     placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                <input
+                <TextField
                     type="password"
                     placeholder="Mot de passe"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)} 
                 />
-                <button onClick={handleRegister}>S'inscrire</button>
+                <Button type="submit" variant='contained' style={{
+                        backgroundColor: '#171625',
+                        width: 245,
+                        height: 60}} onClick={handleRegister}>S'inscrire</Button>
+            </form>
             </div>
         </div>
     );
