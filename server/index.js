@@ -75,7 +75,7 @@ mongoose
 
     app.get("/films", async (req, res) => {
       try {
-        const films = await Film.find();
+        const films = await Film.find().limit(100); //Limite de 30 films temporaires
         res.json(films);
       } catch (error) {
         res.status(500).json({
@@ -127,7 +127,6 @@ mongoose
     });
 
     app.get('/', (req, res) => {
-      //res.send('Bienvenue sur le serveur YMovie !');
       res.sendFile(__dirname + '/index.html');
     });
 
