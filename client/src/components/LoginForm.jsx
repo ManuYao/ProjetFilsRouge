@@ -55,21 +55,28 @@ export default function LoginForm({ setToken }) {
     };
 
     return (
-        <div>
-            <div dangerouslySetInnerHTML={{ __html: avatar }} />
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="email">Email:</label>
-                <input
-                    type="email" id="email" name="email" value={email}
-                    onChange={handleEmailChange}
-                />
-                <label htmlFor="password">Mot de passe:</label>
-                <input
-                    type="password" id="password" name="password" value={password}
-                    onChange={handlePasswordChange}
-                />
-                <button type="submit">Se connecter</button>
-            </form>
+        <div className='page_lauth'>
+            <div className='img_text'>
+                <h1>Connexion</h1>
+                <p>Connectez-vous à votre compte</p>
+                <p>Prêt à découvire des films ?</p>
+            </div>
+            <div className='auth_menu'>
+                <div dangerouslySetInnerHTML={{ __html: avatar }} />
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="email">Email:</label>
+                    <input
+                        type="email" id="email" name="email" value={email}
+                        onChange={handleEmailChange}
+                    />
+                    <label htmlFor="password">Mot de passe:</label>
+                    <input
+                        type="password" id="password" name="password" value={password}
+                        onChange={handlePasswordChange}
+                    />
+                    <button type="submit">Se connecter</button>
+                </form>
+            </div>
         </div>
     );
 }

@@ -27,21 +27,27 @@ const RegisterForm = () => {
     };
 
     return (
-        <div>
-            <h1>Inscription</h1>
-            <input
-                type="text"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-                type="password"
-                placeholder="Mot de passe"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)} 
-            />
-            <button onClick={handleRegister}>S'inscrire</button>
+        <div className='page_auth'>
+            <div className='img_text'>
+                <h1>Inscription</h1>
+                <p>Inscription à un compte</p>
+                <p>Prêt à découvire des films ?</p>
+            </div>
+            <div className='auth_menu'>
+                <input
+                    type="text"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <input
+                    type="password"
+                    placeholder="Mot de passe"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)} 
+                />
+                <button onClick={handleRegister}>S'inscrire</button>
+            </div>
         </div>
     );
 };
