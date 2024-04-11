@@ -1,0 +1,15 @@
+.page_lauth{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    gap: 50%;
+    
+    .img_text{
+        width: 128%;
+    }
+
+    .auth_menu{
+        display: flex;
+        flex-direction: column;
+    }
+}

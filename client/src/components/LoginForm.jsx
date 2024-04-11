@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import {createAvatar} from '@dicebear/avatars';
 import {bottts} from '@dicebear/collection';
+import Button from '@mui/material/Button';
+import '../styles/components/LoginForm.scss';
 
 export default function LoginForm({ setToken }) {
     const [email, setEmail] = useState('');
@@ -74,7 +76,7 @@ export default function LoginForm({ setToken }) {
                         type="password" id="password" name="password" value={password}
                         onChange={handlePasswordChange}
                     />
-                    <button type="submit">Se connecter</button>
+                    <Button type="submit">Se connecter</Button>
                 </form>
             </div>
         </div>

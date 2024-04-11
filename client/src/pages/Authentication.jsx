@@ -55,7 +55,7 @@ export default function Login() {
             ) : (
                 <>
                     {showRegister ? null : <LoginForm setToken={setToken} />}
-                    <p onClick={toggleRegister}>{showRegister ? 'Connexion' : 'Inscription'}</p>
+                    <p style={{position:'relative', left:'84%', width: '166px'}} onClick={toggleRegister}>{showRegister ? 'Connexion' : 'Inscription'}</p>
                     {showRegister && <Register />}
                 </>
             )}
