@@ -74,15 +74,23 @@ mongoose
 
 
     app.get("/films", async (req, res) => {
+      //Pagination des films
+      const page = parseInt(req.query.page) || 1;
+      const limit = parseInt(req.query.limit) || 300;
       try {
-        const films = await Film.find().limit(100); //Limite de 30 films temporaires
-        res.json(films);
+        const totalFilms = await Film.countDocuments();
+        const totalPages = Math.ceil(totalFilms / limit);
+
+        //Récupération des films avec pagination
+        const films = await Film.find().skip((page - 1) * limit) 
+        .limit(limit);
+        res.status(200).json({films, totalPages});
       } catch (error) {
-        res.status(500).json({
-          message: "Erreur lors de la récupération des films",
-          error: error.message,
-        });
-      }
+  res.status(500).json({
+    message: "Erreur lors de la récupération des films",
+    error: error.message,
+  });
+}
     });
 
     //Fonction pour générer un token JWT
