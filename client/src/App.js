@@ -1,14 +1,12 @@
 import './styles/App.css';
-import FilmList from './components/FilmList';
-import Login from './components/Login';
+import Authentification from './pages/Authentification';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-      
-        
-        <Login />
+    
+        <Authentification />
 
       </header>
     </div>

@@ -74,15 +74,23 @@ mongoose
 
 
     app.get("/films", async (req, res) => {
+      //Pagination des films
+      const page = parseInt(req.query.page) || 1;
+      const limit = parseInt(req.query.limit) || 300;
       try {
-        const films = await Film.find();
-        res.json(films);
+        const totalFilms = await Film.countDocuments();
+        const totalPages = Math.ceil(totalFilms / limit);
+
+        //Récupération des films avec pagination
+        const films = await Film.find().skip((page - 1) * limit) 
+        .limit(limit);
+        res.status(200).json({films, totalPages});
       } catch (error) {
-        res.status(500).json({
-          message: "Erreur lors de la récupération des films",
-          error: error.message,
-        });
-      }
+  res.status(500).json({
+    message: "Erreur lors de la récupération des films",
+    error: error.message,
+  });
+}
     });
 
     //Fonction pour générer un token JWT
@@ -94,15 +102,15 @@ mongoose
     app.post("/inscription", async (req, res) => {
       try {
         const { email, password } = req.body;
-        const sub = new Sub({ email, password }); 
-        await sub.save();
-        console.log(email, password);
-        res.json({ message: "Utilisateur inscrit avec succès !" });
+        const sub = new Sub({ email, password });
+        await sub.save(); 
+        console.log(email, password); 
+        res.json({ message: "Utilisateur inscrit avec succès !" }); 
       } catch (error) {
         res.status(500).json({
           message: "Erreur lors de l'inscription",
           error: error.message,
-        });
+        }); 
       }
     });
 
@@ -126,6 +134,9 @@ mongoose
       }
     });
 
+    app.get('/', (req, res) => {
+      res.sendFile(__dirname + '/index.html');
+    });
 
     app.listen(PORT, () => {
       console.log(`Le serveur fonctionne sur http://localhost:${PORT}`);

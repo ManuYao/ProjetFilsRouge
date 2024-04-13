@@ -1,0 +1,26 @@
+
+
+
+//Version tablet
+@media screen and (max-width: 1023px) and (min-width: 768px) {
+    .card_filter{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: start;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-left: -200%;    
+    }    
+}
+
+//Version PC
+@media screen and (min-width: 1024px) {
+    .card_filter{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: start;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-left: -200%;    
+    }
+  }

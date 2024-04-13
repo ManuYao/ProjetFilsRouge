@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# FilsROUGEMovie
+- Est une application de gestion de films qui permet aux utilisateurs de rechercher & d'aimer les films. 
+L'application est composée d'un frontend développé avec React.js et d'un backend développé avec Node.js et Express.js. Les données des films sont stockées dans une base de données MongoDB.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- Fonctionnalités Principales
+Inscription et Connexion : Les utilisateurs peuvent s'inscrire et se connecter à l'application pour accéder à toutes les fonctionnalités.
+Recherche de Films : Les utilisateurs peuvent rechercher des films par titre, genre, année de sortie, etc...
 
-## Available Scripts
+- Aimer et Disliker les Films : Les utilisateurs peuvent aimer ou disliker les films, ce qui affecte le classement et les recommandations.
+Commentaires : Les utilisateurs peuvent laisser des commentaires sur les films et interagir avec d'autres utilisateurs.
 
-In the project directory, you can run:
+- Synchronisation Automatique : Toute modification dans le fichier Excel de données des films est automatiquement reflétée dans la base de données MongoDB.
+##  Structure du Projet
+<details>
+    <summary>frontend :</summary>
+        Contient le code source du frontend React.js.
+</details>
+<details> 
+<summary>backend/:</summary>
+    Contient le code source du backend Node.js et Express.js.
+</details>
+<details> 
+<summary>database :</summary>
+    Contient le fichier Excel de données des films.
+</details>
+<details> 
+<summary>models/* : </summary>
+    Contient les modèles MongoDB pour les utilisateurs et les films.<
+</details>
+<details> 
+<summary>routes/*:</summary>
+    Contient les routes Express.js pour les différentes fonctionnalités de l'application.
+</details>
+<details>
+<summary>index.js :</summary> 
+Fichier principal du backend Node.js.
+Installation et Configuration</details>
 
-### `npm start`
+-------
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Cloner le projet depuis GitHub : 
+``git clone https://github.com/votre-utilisateur/YMovie.git``
+2. Installer les dépendances du frontend : ``cd frontend && npm install``
+3. Installer les dépendances du backend : ``cd backend && npm install``
+4. Assurez-vous d'avoir MongoDB installé localement ou configurez l'URI de connexion dans backend/index.js.
+5. Lancez le frontend : ``cd frontend && npm start``
+6. Lancez le backend : ``cd backend && npm start``
+7. Contributions et Développement Futur
+Les contributions à YMovie sont les bienvenues ! Si vous avez des suggestions d'amélioration, des corrections de bogues ou des fonctionnalités que vous aimeriez voir implémentées, n'hésitez pas à ouvrir une nouvelle issue ou à envoyer une pull request sur GitHub.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Contact
+Pour toute question ou problème, n'hésitez pas à me contacter  à l'adresse suivante : Y@gmail.com
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Merci d'utiliser YMovie et nous espérons que vous apprécierez votre expérience !

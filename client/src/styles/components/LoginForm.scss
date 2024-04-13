@@ -1,0 +1,43 @@
+.page_auth{
+    display: flex;
+    align-items: center;
+    gap: 24%;
+    padding-right: 24%;
+    margin-top: -71px;
+    
+    .img_text{
+        width: 128%;
+    }
+
+    .auth_menu{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10%;
+
+    }
+    .img {
+        background-color: #1B1A17;
+        width: 878px;
+        height: 1024px;
+    }
+    .social{
+        display: flex;
+        gap:12px;
+        margin:16px;
+        cursor: no-drop;
+    }
+    
+    .auth_menu .social-icons {
+        display: flex;
+        gap: 12px;
+        margin: 16px;
+        cursor: no-drop;
+    }
+
+    form{
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+}
