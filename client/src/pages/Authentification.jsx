@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import FilmeFilter from '../components/FilmFilter';
+import FilmFilter from '../components/FilmFilter';
 import LoginForm from '../components/LoginForm';
 import Register from '../components/RegisterForm';
 import '../styles/pages/Authentification.scss';
@@ -38,6 +38,7 @@ export default function Authentication() {
         } catch (error) {
             console.error('Erreur lors de la récupération des données :', error);
         }
+        
     };
 
     // Récupération du token dans le local storage
@@ -69,13 +70,16 @@ export default function Authentication() {
     
             {/* Affiche les films filtrés par genre lors de la connexion */}
             {token && (
-                <>
-                    <FilmeFilter films={Array.isArray(films) ? films : []} genre="Policier" />
-                    <FilmeFilter films={Array.isArray(films) ? films : []} genre="Action" />
-                    <FilmeFilter films={Array.isArray(films) ? films : []} genre="Comédie" />
-                    <FilmeFilter films={Array.isArray(films) ? films : []} genre="Romance" />
-                </>
-            )}
-        </div>
+            <>
+                <div className='section_filter'>
+                    <FilmFilter films={films} genre="Policier" />
+                    <FilmFilter films={films} genre="Action" />
+                    <FilmFilter films={films} genre="Comédie" />
+                    <FilmFilter films={films} genre="Romance" />
+                </div>
+            </>
+        )}
+    </div>
     );
 }    
+// A envoyer dans une autre route soon
