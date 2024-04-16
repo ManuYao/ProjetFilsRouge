@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import icon_like from '../asset/images/icon_like.png';
 
 export default function Like({ filmId }) {
     const [like, setLike] = useState();
@@ -24,8 +25,7 @@ export default function Like({ filmId }) {
 
     return (
         <div>
-            <button onClick={handleLike}>Like</button>
-            <p>{like}</p>
+            <img style={{height: '32px'}} src={icon_like} alt='like_icon' onClick={handleLike} />
         </div>
     );
 }

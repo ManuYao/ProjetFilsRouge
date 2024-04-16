@@ -6,6 +6,7 @@ import Like from './Like';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../styles/components/FilmFilter.scss';
+import icon_dot from '../asset/images/icon_dot.png';// temporaire
 
 function FilmGenreFilter({ genre }) {
     const [films, setFilms] = useState([]);
@@ -55,33 +56,38 @@ function FilmGenreFilter({ genre }) {
 
     return (
         <div className='genre_film'>
-            <h2 className='genre_title' style={{fontWeight: 700, fontSize: 48, marginBottom: 74}}>{genre}</h2>
+            <h2 className='genre_title'>{genre}</h2>
             <Slider {...settings}>
                 {filtredFilms.map(film => (
                     <div className='card_filter' key={film._id} style={{ width: '320px', margin: '0 10px' }}>
                         {loadingSkeleton ? (
                             <Skeleton variant="rectangular" width={320} height={384} />
                         ) : (
-                            <Card className='card' sx={{ height: '384px', width: '320px', backgroundColor: '#D9D9D9' }} />
+                            <Card className='card' sx={{ height: '384px', width: '320px', backgroundColor: 'D9D9D9', opacity: 0.3 }} />
                         )}
                         <div>
                             {loadingSkeleton ? (
                                 <>
-                                    <Skeleton width={200} height={20} sx={{ backgroundColor: '#D9D9D', color: '#D9D9D' }} />
+                                    <Skeleton width={200} height={20} />
                                     <div style={{ display: 'flex', gap: '8px' }}>
                                         <Skeleton width={80} height={20} />
-                                        <Divider orientation='vertical' flexItem sx={{ backgroundColor: 'red' }} />
+                                        <Divider orientation='vertical' flexItem/>
                                         <Skeleton width={80} height={20} />
                                     </div>
                                 </>
                             ) : (
                                 <>
-                                    <h3 style={{ fontSize: '20px', marginTop: '40px' }}>{film.Titre}</h3>
-                                    <div style={{ display: 'flex', gap: '8px', marginTop: '18px' }}>
-                                        <p>{film.Durée}</p>
-                                        <Divider orientation='vertical' flexItem sx={{ backgroundColor: 'red' }} />
-                                        <p style={{ color: 'red' }}>{film.Genre}</p>
-                                        <Like filmId={film._id} />
+                                    <h3 className='title_card'>{film.Titre}</h3>
+                                    <div className='state_films'>
+                                        <div className='time_genre'>
+                                            <p>{film.Durée}</p>
+                                            <Divider orientation='vertical' flexItem sx={{ backgroundColor: 'white' }} />
+                                            <p>{film.Genre}</p>
+                                        </div>
+                                        <div className='more_like'>
+                                            <img style={{height: '32px'}} src={icon_dot} alt='like_icon'/>
+                                            <Like filmId={film._id} />
+                                        </div>
                                     </div>
                                 </>
                             )}

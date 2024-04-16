@@ -75,7 +75,7 @@ mongoose
     app.get("/films", async (req, res) => {
       //Pagination des films
       const page = parseInt(req.query.page) || 1;
-      const limit = parseInt(req.query.limit) || 300;
+      const limit = parseInt(req.query.limit) || 2383;
       try {
         const totalFilms = await Film.countDocuments();
         const totalPages = Math.ceil(totalFilms / limit);

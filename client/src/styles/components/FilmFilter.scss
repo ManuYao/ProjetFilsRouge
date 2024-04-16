@@ -1,3 +1,6 @@
+//import style 
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
 
 //all 
 .more_film {
@@ -7,6 +10,63 @@
  gap: 24px;
  width: 40px; 
  height: 40px;
+}
+.card_element {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+//Carrousel
+// style={{fontWeight: 700, fontSize: 48, marginBottom: 74}}
+.genre_film {
+    .genre_title {
+        font-family: "Lato", sans-serif;
+        font-weight: bold;
+        font-size: 48px;
+        margin-left: 64px;
+        margin-bottom: 74px;
+    }
+}
+
+//Card_Style
+.title_card {
+    font-size: 20px;
+    margin-top: 40px;
+    font-weight: 900;
+    font-family: "Lato", sans-serif
+}
+.state_films {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 240px;
+    max-height: 132px; 
+    margin-top: 18px;
+    font-weight: bolder;
+    
+    .time_genre{
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        font-weight: lighter;
+        gap: 24px;
+        p {
+            font-weight:lighter;
+            font-family: "Lato", sans-serif;
+            font-size: 24px;
+        }
+        
+    }
+    
+    .more_like {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: start;
+        font-weight: lighter;
+        gap: 40px;
+    }
 }
 
 // width: '40px', height: '40px', objectFit: 'cover'
