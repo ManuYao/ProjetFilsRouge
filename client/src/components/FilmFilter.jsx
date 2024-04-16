@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
 import Card from '@mui/material/Card';
 import { Divider, Skeleton } from '@mui/material';
+import Like from './Like';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../styles/components/FilmFilter.scss';
@@ -80,6 +81,7 @@ function FilmGenreFilter({ genre }) {
                                         <p>{film.Durée}</p>
                                         <Divider orientation='vertical' flexItem sx={{ backgroundColor: 'red' }} />
                                         <p style={{ color: 'red' }}>{film.Genre}</p>
+                                        <Like filmId={film._id} />
                                     </div>
                                 </>
                             )}
