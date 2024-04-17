@@ -7,10 +7,12 @@ import google from '../asset/images/logo_google.png';
 import meta from '../asset/images/logo_meta.png';
 import yahoo from '../asset/images/logo_yahoo.png';
 import '../styles/components/LoginForm.scss';
+import { Alert } from '@mui/material';
 
 const RegisterForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loginStatus, setLoginStatus] = useState({});
 
     // Mise à jour du seed pour l'avatar
     const updateAvatar = (name) => {
@@ -25,24 +27,38 @@ const RegisterForm = () => {
         radius: 0,
     });
 
-    const handleRegister = async () => {
-        try {
-            const response = await fetch('http://localhost:2000/inscription', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                // Données d'inscription envoyées à l'API backend
-                body: JSON.stringify({ email, password }), 
-            });
+    const handleRegister = async (event) => {
+        event.preventDefault();
 
-            if (response.ok) {
-                console.log('Inscription réussie !');
-            } else {
-                console.error('Erreur lors de l\'inscription');
+        // Validation de l'email et du mot de passe
+        if (email.includes('@') && password.length >= 8) {
+            try {
+                const response = await fetch('http://localhost:2000/inscription', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    // Données d'inscription envoyées à l'API backend
+                    body: JSON.stringify({ email, password }), 
+                });
+
+                if (response.ok) {
+                    console.log('Inscription réussie !');
+                    setLoginStatus({ success: true, message: 'Inscription réussie !' });
+                    setTimeout(() => {
+                        window.location.href = '/login';
+                    }, 3000);
+                } else {
+                    console.error('Erreur lors de l\'inscription');
+                    setLoginStatus({ success: false, message: 'Erreur lors de l\'inscription' });
+                }
+            } catch (error) {
+                console.error('Erreur lors de la requête d\'inscription', error);
+                setLoginStatus({ success: false, message: 'Erreur lors de la requête d\'inscription' });
             }
-        } catch (error) {
-            console.error('Erreur lors de la requête d\'inscription', error);
+        } else {
+            console.log('Email ou mot de passe invalide');
+            setLoginStatus({ success: false, message: 'Email ou mot de passe invalide' });
         }
     };
 
@@ -56,6 +72,14 @@ const RegisterForm = () => {
                     <img src={meta} alt='meta' />
                     <img src={yahoo} alt='yahoo' />   
                 </div>
+
+                {loginStatus.message && (
+                    <Alert className='msg_alert' severity={loginStatus.success ? "success" : "error"}>
+                        {loginStatus.message}
+                    </Alert> 
+                    //Soon redirection page login via react router
+                )}
+
                 <form>
                     <TextField
                         type="text"

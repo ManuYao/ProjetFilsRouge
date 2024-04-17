@@ -68,7 +68,10 @@ export default function Authentication() {
                 </>
             )}
     
-            {/* Affiche les films filtrés par genre lors de la connexion */}
+            {/* 
+                Affiche les films filtrés par genre lors de la connexion
+                Soon à envoyer dans une autre route
+            */}
             {token && (
             <>
                 <div className='section_filter'>

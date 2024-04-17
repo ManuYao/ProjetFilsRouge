@@ -67,24 +67,15 @@ mongoose
     app.get("/data", verifyToken, (req, res) => {
       res.json({ message: "Données protégées récupérées avec succès." });
     });
-    //' _Vérification
+    (" _Vérification");
 
     //Appel de la fonction ##injectFilmsData() pour injecter les données de films dans la base de données
     injectFilmsData();
 
     app.get("/films", async (req, res) => {
-      //Pagination des films
-      const page = parseInt(req.query.page) || 1;
-      const limit = parseInt(req.query.limit) || 2383;
       try {
-        const totalFilms = await Film.countDocuments();
-        const totalPages = Math.ceil(totalFilms / limit);
-
-        //Récupération des films avec pagination
-        const films = await Film.find()
-          .skip((page - 1) * limit)
-          .limit(limit);
-        res.status(200).json({ films, totalPages });
+        const films = await Film.find().exec();
+        res.json(films);
       } catch (error) {
         res.status(500).json({
           message: "Erreur lors de la récupération des films",

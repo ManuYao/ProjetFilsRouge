@@ -29,3 +29,7 @@ export default function Like({ filmId }) {
         </div>
     );
 }
+
+//Permet d'afficher une liste de films filtrée de film liké  soon
+// export function LikedFilmsList() {
+// }
