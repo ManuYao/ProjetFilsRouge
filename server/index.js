@@ -5,6 +5,7 @@ const app = express();
 const Sub = require("./models/subModel");
 const Film = require("./models/filmsModel");
 const Like = require("./models/noticeModel");
+const NewFilm = require("./models/newFilmsModel");
 const xlsx = require("xlsx");
 const jwt = require("jsonwebtoken");
 const PORT = process.env.PORT || 2000;
@@ -79,6 +80,36 @@ mongoose
       } catch (error) {
         res.status(500).json({
           message: "Erreur lors de la récupération des films",
+          error: error.message,
+        });
+      }
+    });
+
+    //Ajout d'un film
+    app.post("/addNewFilm", async (req, res) => {
+      try {
+        const filmData = req.body;
+        const newFilm = new NewFilm(filmData);
+        await newFilm.save();
+        res
+          .status(201)
+          .json({ message: "Nouveau film ajouté avec succès", film: newFilm });
+      } catch (error) {
+        res.status(500).json({
+          message: "Erreur lors de l'ajout du nouveau film",
+          error: error.message,
+        });
+      }
+    });
+
+    // Récupère tous les films
+    app.get("/newFilms", async (req, res) => {
+      try {
+        const newfilms = await NewFilm.find().exec();
+        res.json(newfilms);
+      } catch (error) {
+        res.status(500).json({
+          message: "Erreur lors de la récupération des nouveaux films",
           error: error.message,
         });
       }
