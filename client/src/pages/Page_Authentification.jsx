@@ -3,6 +3,7 @@ import FilmFilter from '../components/FilmFilter';
 import LoginForm from '../components/LoginForm';
 import Register from '../components/RegisterForm';
 import '../styles/pages/Authentification.scss';
+import {motion} from 'framer-motion';
 
 export default function Authentication() {
     const [token, setToken] = useState('');
@@ -60,9 +61,9 @@ export default function Authentication() {
                     {showRegister && <Register />}
                     <div style={{ position: 'relative', left: 'calc(100% - 200px)', width: '166px' }} onClick={toggleRegister}>
                         {showRegister ? 
-                            <p className='auth_text_sub' >Connexion</p> 
+                            <motion.p whileTap={{ scale: 0.8 }}  whileFocus={{ scale: 1.2 }} className='auth_text_sub' >Connexion</motion.p> 
                             : 
-                            <p className='auth_text_sub'>Inscription</p>}
+                            <motion.p  whileHover={{ scale: 1.2 }}className='auth_text_sub'>Inscription</motion.p>}
                     </div>
                     
                 </>

@@ -8,6 +8,7 @@ import meta from '../asset/images/logo_meta.png';
 import yahoo from '../asset/images/logo_yahoo.png';
 import '../styles/components/LoginForm.scss';
 import { Alert } from '@mui/material';
+import { motion } from 'framer-motion';
 
 const RegisterForm = () => {
     const [email, setEmail] = useState('');
@@ -66,7 +67,7 @@ const RegisterForm = () => {
         <div className='page_auth'>
             <div className='img' />
             <div className='auth_menu'>
-                <div dangerouslySetInnerHTML={{ __html: avatar }} />
+            <motion.div  animate={{ y: 20 }} dangerouslySetInnerHTML={{ __html: avatar }} />
                 <div className='social'>
                     <img src={google} alt='google' />
                     <img src={meta} alt='meta' />
