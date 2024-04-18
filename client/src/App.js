@@ -1,14 +1,21 @@
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Autentification from "./pages/Page_Authentification";
+import Home from "./pages/Page_Home";
+import AddFilm from "./pages/Page_AddFilm";
+import Unknown from "./pages/Page_Unknown";
 import "./styles/App.css";
-// import Authentification from './pages/Authentification';
-import ShowNewFilm from "./components/ShowNewFilm";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <ShowNewFilm />
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/addfilm" element={<AddFilm />} />
+        <Route path="/" element={<Autentification />} />
+        <Route path="*" element={<Unknown />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
