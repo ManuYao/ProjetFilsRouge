@@ -2,8 +2,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 // import "../styles/pages/Unknown.scss"; soon
+import transitions from "../components/asset/transition";
 
-export default function Unknown() {
+function Unknown() {
   return (
     <div className="unknown">
       <h1>404</h1>
@@ -12,3 +13,5 @@ export default function Unknown() {
     </div>
   );
 }
+
+export default transitions(Unknown);

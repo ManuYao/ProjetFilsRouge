@@ -4,8 +4,9 @@ import LoginForm from '../components/LoginForm';
 import Register from '../components/RegisterForm';
 import '../styles/pages/Authentification.scss';
 import {motion} from 'framer-motion';
+import transitions from '../components/asset/transition';
 
-export default function Authentication() {
+function Authentication() {
     const [token, setToken] = useState('');
     const [films, setFilms] = useState([]);
     const [showRegister, setShowRegister] = useState(false);
@@ -87,3 +88,5 @@ export default function Authentication() {
     );
 }    
 // A envoyer dans une autre route soon
+
+export default transitions(Authentication);

@@ -1,19 +1,21 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import Autentification from "./pages/Page_Authentification";
 import AddFilm from "./pages/Page_AddFilm";
 import Unknown from "./pages/Page_Unknown";
 import "./styles/App.css";
 
 function App() {
+  const location = useLocation();
   return (
-    <BrowserRouter>
-      <Routes>
+    <AnimatePresence mode="wait">
+      <Routes location={location}>
         <Route path="/" element={<Autentification />} />
         <Route path="/addfilm" element={<AddFilm />} />
         <Route path="*" element={<Unknown />} />
       </Routes>
-    </BrowserRouter>
+    </AnimatePresence>
   );
 }
 
