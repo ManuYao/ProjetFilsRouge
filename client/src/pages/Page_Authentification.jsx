@@ -53,7 +53,7 @@ function Authentication() {
     }, []);
 
     return (
-        <div style={{ overflow: 'hidden' }}>
+        <div style={{ overflow: 'hidden',  zIndex:3 }}>
             {token ? (
                 <button onClick={handleLogout}>Se déconnecter</button>
             ) : (

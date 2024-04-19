@@ -9,13 +9,15 @@ import "./styles/App.css";
 function App() {
   const location = useLocation();
   return (
-    <AnimatePresence mode="wait">
-      <Routes location={location}>
-        <Route path="/" element={<Autentification />} />
-        <Route path="/addfilm" element={<AddFilm />} />
-        <Route path="*" element={<Unknown />} />
-      </Routes>
-    </AnimatePresence>
+    <>
+      <AnimatePresence mode="wait">
+        <Routes location={location}>
+          <Route path="/" element={<Autentification />} />
+          <Route path="/addfilm" element={<AddFilm />} />
+          <Route path="*" element={<Unknown />} />
+        </Routes>
+      </AnimatePresence>
+    </>
   );
 }
 
