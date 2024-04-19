@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 
-export default function Page_AddFilm () {
-    const [films, setFilms] = useState([]);
+function Page_AddFilm () {
+    // const [films, setFilms] = useState([]);
     const [titre, setTitre] = useState("");
     const [réalisateur, setRéalisateur] = useState("");
     const [année, setAnnée] = useState("");
