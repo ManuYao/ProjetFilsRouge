@@ -6,7 +6,6 @@ import transition from '../components/asset/transition'
 import "../styles/pages/Page_addFilm.scss";
 
 function Page_AddFilm () {
-    // const [films, setFilms] = useState([]);
     const [titre, setTitre] = useState("");
     const [réalisateur, setRéalisateur] = useState("");
     const [année, setAnnée] = useState("");
