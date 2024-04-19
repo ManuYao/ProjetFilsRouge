@@ -13,13 +13,20 @@ function FilmGenreFilter({ genre }) {
     const [films, setFilms] = useState([]);
     const [filtredFilms, setFiltredFilms] = useState([]);
     const [loadingSkeleton, setLoadingSkeleton] = useState(false);
+    const [loadingError, setLoadingError] = useState(false); 
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 setLoadingSkeleton(true);
+                const timeout = setTimeout(() => {
+                    setLoadingError(true); 
+                }, 5000);
+
                 const response = await fetch(`http://localhost:2000/films`);
                 const data = await response.json();
+                clearTimeout(timeout); 
+
                 if (Array.isArray(data)) {
                     setFilms(data);
                 } else {
@@ -27,8 +34,9 @@ function FilmGenreFilter({ genre }) {
                 }
             } catch (error) {
                 console.error('Erreur lors de la récupération des données des films:', error);
+                setLoadingError(true); 
             } finally {
-                setLoadingSkeleton(false); 
+                setLoadingSkeleton(false);
             }
         };
 
@@ -61,8 +69,8 @@ function FilmGenreFilter({ genre }) {
                 {filtredFilms.length > 0 ? (
                     filtredFilms.map(film => (
                         <div className='card_filter' key={film._id} style={{ width: '320px', margin: '0 10px', marginLeft:'100px'}}>
-                            {loadingSkeleton ? (
-                                LoadingSkeleton()
+                            {loadingError ? ( 
+                                errorLoadingSkeleton()
                             ) : (
                                 <>
                                      <Card className='card' sx={{ height: '384px', width: '320px', backgroundColor: 'D9D9D9', opacity: 0.3 }} />
@@ -83,7 +91,11 @@ function FilmGenreFilter({ genre }) {
                         </div>
                     ))
                 ) : (
-                    errorLoadingSkeleton()
+                    loadingSkeleton ? ( 
+                        LoadingSkeleton()
+                    ) : (
+                        errorLoadingSkeleton()   /* Soon ajouter un rechargement des élement en error pour 10 sec */
+                    )
                 )}
             </Slider>
         </div>

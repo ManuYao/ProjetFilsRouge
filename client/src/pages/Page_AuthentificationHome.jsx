@@ -6,7 +6,7 @@ import '../styles/pages/Authentification.scss';
 import {motion} from 'framer-motion';
 import transitions from '../components/asset/transition';
 
-function Authentication() {
+function AuthenticationHome() {
     const [token, setToken] = useState('');
     const [films, setFilms] = useState([]);
     const [showRegister, setShowRegister] = useState(false);
@@ -53,7 +53,7 @@ function Authentication() {
     }, []);
 
     return (
-        <div style={{ overflow: 'hidden',  zIndex:3 }}>
+        <div style={{ overflow: 'hidden'}}>
             {token ? (
                 <button onClick={handleLogout}>Se déconnecter</button>
             ) : (
@@ -89,4 +89,4 @@ function Authentication() {
 }    
 // A envoyer dans une autre route soon
 
-export default transitions(Authentication);
+export default transitions(AuthenticationHome);

@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import Autentification from "./pages/Page_Authentification";
+import Autentification from "./pages/Page_AuthentificationHome";
 import AddFilm from "./pages/Page_AddFilm";
 import Unknown from "./pages/Page_Unknown";
 import "./styles/App.css";
