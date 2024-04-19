@@ -1,9 +1,12 @@
 //Permet d'ajouter un film à la liste des films et de l'envoyer à la base de données différente de la liste des films 
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import TextField from '@mui/material/TextField';
+import transition from '../components/asset/transition'
+import "../styles/pages/Page_addFilm.scss";
 
-export default function Page_AddFilm () {
-    const [films, setFilms] = useState([]);
+function Page_AddFilm () {
+    // const [films, setFilms] = useState([]);
     const [titre, setTitre] = useState("");
     const [réalisateur, setRéalisateur] = useState("");
     const [année, setAnnée] = useState("");
@@ -16,7 +19,7 @@ export default function Page_AddFilm () {
 
     const newFilm = async (filmData) => {
         try {
-            const response = await fetch("http://localhost:2000/newfilms", {
+            const response = await fetch("http://localhost:2000/addNewFilm", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json", 
@@ -29,9 +32,10 @@ export default function Page_AddFilm () {
             console.error("Erreur lors de l'ajout du film:", error);
         }
     }
+    
+    console.log(titre, réalisateur, année, durée, nationalité, genre, synopsis, titreOriginal, annéeDeProduction);
 
     return (
-
         <div>
             <h1>Ajouter un film</h1>
             <form onSubmit={(event) => {
@@ -48,27 +52,26 @@ export default function Page_AddFilm () {
                     "Année de production": annéeDeProduction,
                 });
             }}>
-                <input type="text" placeholder="Titre" value={titre} onChange={(event) => setTitre(event.target.value)} />
-
-                <input type="text" placeholder="Réalisateur" value={réalisateur} onChange={(event) => setRéalisateur(event.target.value)} />
-
-                <input type="number" placeholder="Année" value={année} onChange={(event) => setAnnée(event.target.value)} />
-
-                <input type="text" placeholder="Durée" value={durée} onChange={(event) => setDurée(event.target.value)} />
-
-                <input type="text" placeholder="Nationalité" value={nationalité} onChange={(event) => setNationalité(event.target.value)} />
-
-                <input type="text" placeholder="Genre" value={genre} onChange={(event) => setGenre(event.target.value)} />
-
-                <input type="text" placeholder="Synopsis" value={synopsis} onChange={(event) => setSynopsis(event.target.value)} />
-
-                <input type="text" placeholder="Titre original" value={titreOriginal} onChange={(event) => setTitreOriginal(event.target.value)} />
-
-                <input type="number" placeholder="Année de production" value={annéeDeProduction} onChange={(event) => setAnnéeDeProduction(event.target.value)} />
-
+            <div className="new_film_input">
+                <TextField variant="outlined" label='Titre' value={titre} onChange={(event) => setTitre(event.target.value)} />
+                <TextField variant="outlined" label='Réalisateur' value={réalisateur} onChange={(event) => setRéalisateur(event.target.value)} />
+                <TextField label="Année" type="number" InputLabelProps={{ shrink: true,}} value={année} onChange={(event) => setAnnée(event.target.value)} />
+                <TextField variant="outlined" label='Durée' value={durée} onChange={(event) => setDurée(event.target.value)} />
+                <TextField variant="outlined" label='Nationalité' value={nationalité} onChange={(event) => setNationalité(event.target.value)} />
+                <TextField variant="outlined" label='Genre' value={genre} onChange={(event) => setGenre(event.target.value)} />
+                <TextField variant="outlined" label='Synopsis' value={synopsis} onChange={(event) => setSynopsis(event.target.value)} />
+                <TextField variant="outlined" 
+                            label='Titre original' 
+                            value={titreOriginal} 
+                            onChange={
+                                (event) => setTitreOriginal(event.target.value)} 
+                />
+                <TextField label="Année de production" type="number" InputLabelProps={{ shrink: true,}} value={annéeDeProduction} onChange={(event) => setAnnéeDeProduction(event.target.value)} />
                 <button type="submit">Ajouter</button>
-            </form>
-        </div>
+            </div>
+        </form>
+    </div>
     )
-    
 }
+
+export default transition(Page_AddFilm);
