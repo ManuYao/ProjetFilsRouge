@@ -14,7 +14,7 @@
   height: 100vh;
   background: #1B1A17;
   transform-origin: left; 
-  animation: slideOut 0.5s forwards; 
+  animation: slideOut 1s forwards; 
 }
 
 .slide-out {
@@ -25,7 +25,7 @@
   height: 100vh;
   background: #1B1A17;
   transform-origin: left; 
-  animation: slideOut 0.5s forwards; 
+  animation: slideOut 1s forwards; 
 }
 
 @keyframes slideOut {

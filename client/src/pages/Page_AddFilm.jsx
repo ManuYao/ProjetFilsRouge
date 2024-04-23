@@ -6,7 +6,7 @@ import transition from '../components/asset/transition'
 import "../styles/pages/Page_addFilm.scss";
 
 function Page_AddFilm () {
-    const [films, setFilms] = useState([]);
+    // const [films, setFilms] = useState([]);
     const [titre, setTitre] = useState("");
     const [réalisateur, setRéalisateur] = useState("");
     const [année, setAnnée] = useState("");
@@ -36,7 +36,7 @@ function Page_AddFilm () {
     console.log(titre, réalisateur, année, durée, nationalité, genre, synopsis, titreOriginal, annéeDeProduction);
 
     return (
-        <div>
+        <div className="new_film_input">
             <h1>Ajouter un film</h1>
             <form onSubmit={(event) => {
                 event.preventDefault();
@@ -52,23 +52,74 @@ function Page_AddFilm () {
                     "Année de production": annéeDeProduction,
                 });
             }}>
-            <div className="new_film_input">
-                <TextField variant="outlined" label='Titre' value={titre} onChange={(event) => setTitre(event.target.value)} />
-                <TextField variant="outlined" label='Réalisateur' value={réalisateur} onChange={(event) => setRéalisateur(event.target.value)} />
-                <TextField label="Année" type="number" InputLabelProps={{ shrink: true,}} value={année} onChange={(event) => setAnnée(event.target.value)} />
-                <TextField variant="outlined" label='Durée' value={durée} onChange={(event) => setDurée(event.target.value)} />
-                <TextField variant="outlined" label='Nationalité' value={nationalité} onChange={(event) => setNationalité(event.target.value)} />
-                <TextField variant="outlined" label='Genre' value={genre} onChange={(event) => setGenre(event.target.value)} />
-                <TextField variant="outlined" label='Synopsis' value={synopsis} onChange={(event) => setSynopsis(event.target.value)} />
-                <TextField variant="outlined" 
-                            label='Titre original' 
-                            value={titreOriginal} 
-                            onChange={
-                                (event) => setTitreOriginal(event.target.value)} 
+       <div className="form_all">
+            <div className="form_1">
+                    <TextField 
+                    InputProps={{style: {color: 'white'}}}
+                    variant="outlined" 
+                    label='Titre' 
+                    value={titre} 
+                    onChange={(event) => setTitre(event.target.value)} 
                 />
-                <TextField label="Année de production" type="number" InputLabelProps={{ shrink: true,}} value={annéeDeProduction} onChange={(event) => setAnnéeDeProduction(event.target.value)} />
-                <button type="submit">Ajouter</button>
+
+                <TextField 
+                    variant="outlined" 
+                    label='Réalisateur' 
+                    value={réalisateur} 
+                    onChange={(event) => setRéalisateur(event.target.value)} 
+                />
+
+                <TextField 
+                    label="Année" 
+                    type="number" 
+                    InputLabelProps={{ shrink: true,}} 
+                    value={année} 
+                    onChange={(event) => setAnnée(event.target.value)} 
+                />
+
+                <TextField 
+                    variant="outlined" 
+                    label='Durée' 
+                    value={durée} 
+                    onChange={(event) => 
+                    setDurée(event.target.value)} 
+                />
             </div>
+                <div className="form_2">
+                    <TextField 
+                        variant="outlined" 
+                        label='Nationalité' 
+                        value={nationalité} 
+                        onChange={(event) => setNationalité(event.target.value)} 
+                    />
+                    <TextField 
+                        variant="outlined" 
+                        label='Genre' 
+                        value={genre} 
+                        onChange={(event) => setGenre(event.target.value)} 
+                    />
+                    <TextField 
+                        variant="outlined" 
+                        label='Synopsis' 
+                        value={synopsis} 
+                        onChange={(event) => setSynopsis(event.target.value)} 
+                    />
+                    <TextField variant="outlined" 
+                        label='Titre original' 
+                        value={titreOriginal} 
+                        onChange={
+                        (event) => setTitreOriginal(event.target.value)} 
+                    />
+                    <TextField 
+                        label="Année de production" 
+                        type="number" 
+                        InputLabelProps={{ shrink: true,}} 
+                        value={annéeDeProduction} 
+                        onChange={(event) => setAnnéeDeProduction(event.target.value)} 
+                    />
+                </div>   
+                </div>
+                <button type="submit">Ajouter</button>
         </form>
     </div>
     )

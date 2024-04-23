@@ -11,14 +11,14 @@ const transitions = (OrgComponent) => {
         className="slide-in"
         initial={{ opacity: 0 }}
         animate={{ opacity: 0 }}
-        exit={{ scaleY: 1 }}
+        exit={{ x: "-100%" }}
         transition={{ duration: 6, ease: [0.22, 1, 0.36, 1] }}
       />
       <motion.div
         className="slide-out"
         initial={{ opacity: 1 }}
         animate={{ opacity: 1 }}
-        exit={{ scaleY: 0 }}
+        exit={{ x: "100%" }}
         transition={{ duration: 6, ease: [0.22, 1, 0.36, 1] }}
       />
     </>
